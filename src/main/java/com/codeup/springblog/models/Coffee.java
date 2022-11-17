@@ -37,6 +37,12 @@ public class Coffee {
     public Coffee (String brand) {
         this.brand = brand;
     }
+
+    public Coffee (String roast, String origin, String brand){
+        this.roast = roast;
+        this.origin = origin;
+        this.brand = brand;
+    }
                                 /* ################## Constructors ################## */
 
 
