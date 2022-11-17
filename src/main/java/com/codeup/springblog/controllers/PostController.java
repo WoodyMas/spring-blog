@@ -45,4 +45,9 @@ public class PostController {
 //        return "You posted " + word + "!";
     }
 
+    @GetMapping("/roll-dice")
+    public String rollDice(){
+        return "roll-dice";
+    }
+
 } // End PostController Class
