@@ -1,6 +1,7 @@
 package com.codeup.springblog.controllers;
 
 import com.codeup.springblog.models.Coffee;
+import com.codeup.springblog.repositories.CoffeeRepository;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.*;
@@ -9,13 +10,24 @@ import java.util.ArrayList;
 import java.util.List;
 
 @Controller
+
 @RequestMapping("/coffee") // receive get request to /coffee
 public class CoffeeController {
+    private final CoffeeRepository coffeeDao;
+
+    public CoffeeController(CoffeeRepository coffeeDao) {
+        this.coffeeDao = coffeeDao;
+    }
+
     @GetMapping // when the get request is received, it returns a "view" (coffee.html is the view being referenced)
     public String coffee(){
         // Not displaying coffee on page, we are referencing coffee.html (referencing file named "coffee")
         return "coffee";
     }
+
+//    public String addCoffeeForm(){
+//
+//    }
 
     @GetMapping("/{roast}")
     public String roast(@PathVariable String roast, Model model){
