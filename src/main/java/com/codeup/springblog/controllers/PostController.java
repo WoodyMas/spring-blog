@@ -1,22 +1,36 @@
 package com.codeup.springblog.controllers;
 
+import com.codeup.springblog.models.Post;
 import org.apache.logging.log4j.message.StringFormattedMessage;
 import org.springframework.stereotype.Controller;
+import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.*;
+
+import java.util.ArrayList;
+import java.util.List;
 
 @Controller
 public class PostController {
 
     @GetMapping("/posts")
-    @ResponseBody
-    public String postIndexPage(){
-        return "posts index page";
+//    @ResponseBody
+    public String allPosts(Model model){
+
+        Post postTest1 = new Post("I had a wonderful day! :)", "Today I had a wonderful day because I found a $20 bill!");
+        Post postTest2 = new Post("Why do people take my money?", "I accidentally dropped a $20 bill, and when I went back to see where I left it, it was GONE!!!!!!!!!!!");
+        List<Post> allPostList = new ArrayList<>(List.of(postTest1, postTest2));
+        model.addAttribute("allPosts", allPostList);
+
+        return "/posts/show";
     }
 
     @GetMapping("/posts/{id}")
-    @ResponseBody
-    public String viewPostId(@PathVariable long id) {
-        return "Here is post #" + id +":";
+//    @ResponseBody
+    public String viewPostId(@PathVariable long id, Model model) {
+        Post postView = new Post("MY Title", "This is the body of my post!It works THE MOST");
+        model.addAttribute("aPost", postView);
+
+        return "/posts/index";
     }
 
     @GetMapping("/posts/create")
@@ -44,5 +58,7 @@ public class PostController {
                 "    </form>";
 //        return "You posted " + word + "!";
     }
+
+
 
 } // End PostController Class
