@@ -10,4 +10,4 @@ public class SpringBlogApplication {
         SpringApplication.run(SpringBlogApplication.class, args);
     }
 
-}
+} // End SpringBlogApplication class

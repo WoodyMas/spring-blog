@@ -1,14 +1,45 @@
 package com.codeup.springblog.models;
 
 public class Dice {
-    private int chosenNum;
-    private int randomNum;
+/*####################################### Instance Variables/ Properties #############################################*/
+    public int randomRollNumber;
+    public int chosenNumber;
+    final static int sides = 6;
 
-    Dice(){}
 
-    public static int rollDice() {
-        return (int) (Math.random() * 8);
+
+
+/*################################################## Constructors ####################################################*/
+    public Dice () {}
+
+    public Dice(int randomRollNumber){
+        this.randomRollNumber = randomRollNumber;
+    }
+    public Dice(int randomRollNumber, int chosenNumber) {
+        this.randomRollNumber = randomRollNumber;
+        this.chosenNumber = chosenNumber;
     }
 
 
+/*##################################################### Methods ######################################################*/
+
+    public int getRandomRollNumber() {
+        return randomRollNumber;
+    }
+
+    public void setRandomRollNumber(int randomRollNumber) {
+        this.randomRollNumber = randomRollNumber;
+    }
+
+    public int getChosenNumber() {
+        return chosenNumber;
+    }
+
+    public void setChosenNumber(int chosenNumber) {
+        this.chosenNumber = chosenNumber;
+    }
+
+    public static int randomRollMethod() {
+        return (int) Math.floor((Math.random() * sides) + 1);
+    }
 }
