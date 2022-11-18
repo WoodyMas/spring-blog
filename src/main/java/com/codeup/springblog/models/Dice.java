@@ -4,6 +4,7 @@ public class Dice {
 /*####################################### Instance Variables/ Properties #############################################*/
     public int randomRollNumber;
     public int chosenNumber;
+    final static int sides = 6;
 
 
 
@@ -39,7 +40,6 @@ public class Dice {
     }
 
     public static int randomRollMethod() {
-        int randomRoll =  (int) Math.floor((Math.random() * 6) + 1);
-        return randomRoll;
+        return (int) Math.floor((Math.random() * sides) + 1);
     }
 }

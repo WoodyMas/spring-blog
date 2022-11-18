@@ -2,21 +2,28 @@ package com.codeup.springblog.controllers;
 
 import com.codeup.springblog.models.Dice;
 import org.springframework.stereotype.Controller;
+import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestMapping;
 
 @Controller
-@RequestMapping("/dice")
+@RequestMapping("/roll-dice")
 public class DiceController {
     @GetMapping
     public String rollDice(){
         return "roll-dice";
     }
-//    @GetMapping("/")
-//    public String roll(@PathVariable int num1, Model model){
-//        Dice diceRoll = new Dice()
-//    }
+    @GetMapping("/{num1}")
+    public String roll(@PathVariable int num1, Model model) {
+        Dice diceRoll = new Dice(/* randomRoll ,*/ /* Chosen number*/);
+        model.addAttribute("randomNum", diceRoll.randomRollMethod());
+        model.addAttribute("chosenNum", num1);
+        return "roll-dice";
+    }
+
+
+
 
 
 
