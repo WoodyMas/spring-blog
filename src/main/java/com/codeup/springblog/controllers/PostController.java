@@ -18,7 +18,7 @@ public class PostController {
 
         Post postTest1 = new Post("I had a wonderful day! :)", "Today I had a wonderful day because I found a $20 bill!");
         Post postTest2 = new Post("Why do people take my money?", "I accidentally dropped a $20 bill, and when I went back to see where I left it, it was GONE!!!!!!!!!!!");
-        List<Post> allPostList = new ArrayList<>(List.of(postTest1, postTest2));
+        List<Post> allPostList = new ArrayList<>(List.of(postTest2, postTest1));
         model.addAttribute("allPosts", allPostList);
 
         return "/posts/show";

@@ -1,10 +1,18 @@
 package com.codeup.springblog.models;
 
 public class Post {
+
+    private long id;
     private String title;
     private String body;
 
     ///////////////// Getters and Setters /////////////////////
+
+    // Getter Id
+    public long getId() {
+        return id;
+    }
+
 
     // Getter Title
     public String getTitle(){
@@ -16,6 +24,10 @@ public class Post {
         return this.body = body;
     }
 
+    // Setter Id
+    public void setId(long id) {
+        this.id = id;
+    }
     // Setter Title
     public void setTitle(String newTitle){
         this.title = newTitle;

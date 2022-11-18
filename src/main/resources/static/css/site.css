@@ -1,9 +1,37 @@
-body {
+.main-body {
     background-color: black;
     color: white;
     font-family: sans-serif;
 }
 
+
+
+.postCard {
+    background-color: gray;
+    color: chartreuse;
+    margin: 1%;
+    width: 500px;
+    padding: 0.5%;
+    font-family: sans-serif;
+    font-size: 100%;
+    border-radius: 0px;
+    /*justify-content: space-between;*/
+}
+
+.postCard>p{
+    margin :0;
+}
+
+.postDisplay {
+    display: flex;
+    justify-items: center;
+
+}
+
 a:visited {
     color: chartreuse;
+}
+
+footer {
+
 }
