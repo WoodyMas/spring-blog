@@ -12,7 +12,7 @@
 
     <div class="container-fluid postDisplay">
 
-            <div th:each="post : ${allPosts}" class="card postCard">
+            <div th:each="post : ${posts}" class="card postCard">
                 <h4><span th:text="${post.getTitle()}"></span></h4>
                 <hr>
                 <br>

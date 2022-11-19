@@ -1,10 +1,14 @@
 package com.codeup.springblog.models;
 
+import com.codeup.springblog.repositories.PostRepository;
+
 import javax.persistence.*;
 
 @Entity
-@Table(name = "post")
+@Table(name = "Posts")
 public class Post {
+
+
 
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
@@ -48,10 +52,15 @@ public class Post {
     }
 
     ///////////////////// Constructors /////////////////////////
-    public Post(){
 
+    public Post(){}
+
+    public Post(String title, String body) {
+        this.title = title;
+        this.body = body;
     }
-    public Post(String title, String body){
+
+    public Post(PostRepository postDao, String title, String body){
         this.title = title;
         this.body = body;
     }
