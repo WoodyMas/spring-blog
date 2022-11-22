@@ -31,7 +31,7 @@ public class PostController {
     @GetMapping("/posts/{id}")
 //    @ResponseBody
     public String viewPostId(@PathVariable long id, Model model) {
-        Post postView = new Post(postDao, "MY Title", "This is the body of my post!It works THE MOST");
+        Post postView = postDao.findById(id);
         model.addAttribute("aPost", postView);
 
         return "/posts/index";

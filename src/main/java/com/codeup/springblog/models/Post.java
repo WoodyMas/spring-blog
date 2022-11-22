@@ -30,12 +30,12 @@ public class Post {
 
     // Getter Title
     public String getTitle(){
-        return this.title = title;
+        return this.title;
     }
 
     // Getter Body
     public String getBody(){
-        return this.body = body;
+        return this.body;
     }
 
     // Setter Id
