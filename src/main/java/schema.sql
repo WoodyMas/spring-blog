@@ -1,4 +1,4 @@
-USE springblog_db;
+USE codeup_test_db;
 
 SHOW TABLES;
 
@@ -9,4 +9,5 @@ DELETE FROM posts WHERE id = 7;
 SHOW DATABASES;
 
 USE codeup_test_db;
+
 

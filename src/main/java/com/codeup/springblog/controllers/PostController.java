@@ -1,6 +1,7 @@
 package com.codeup.springblog.controllers;
 
 import com.codeup.springblog.models.Post;
+import com.codeup.springblog.models.User;
 import com.codeup.springblog.repositories.PostRepository;
 import com.codeup.springblog.repositories.UserRepository;
 import org.springframework.stereotype.Controller;
@@ -14,6 +15,7 @@ import java.util.List;
 public class PostController {
     private final PostRepository postDao;
     private final UserRepository userDao;
+
 
     @GetMapping("/posts")
 //    @ResponseBody
@@ -47,7 +49,8 @@ public class PostController {
 
     @PostMapping("/posts/create")
     public String createNewController(@RequestParam(name="titleInput") String title, @RequestParam(name="bodyInput") String body ){
-        Post post = new Post(title, body);
+        User user = userDao.findUserById(1);
+        Post post = new Post(user, title, body);
         postDao.save(post);
         return "redirect:/posts";
     }
@@ -68,8 +71,19 @@ public class PostController {
 //    }
 
 ///////////////////////// Constructor ////////////////////////////////
-    public PostController(PostRepository postDao){
+    public PostController(PostRepository postDao, UserRepository userDao){
+
         this.postDao = postDao;
+        this.userDao = userDao;
+
+
     }
+
+//    @PostMapping
+//    public String joinPostUser(@RequestParam (name = "title") String title, @RequestParam (name = "body") String body, @RequestParam (name = "email") String email, @RequestParam (name = "username") String username){
+//
+//        return "";
+//    }
+
 
 } // End PostController Class

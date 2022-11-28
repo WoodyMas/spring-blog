@@ -46,11 +46,11 @@ public class CoffeeController {
     }
 
     // To make the form work we need a @PostMapping
-    @PostMapping
-    public String signUp(@RequestParam(name = "email") String email, Model model){
-        model.addAttribute("emailAttr", email);
-        return "coffee";
-    }
+//    @PostMapping
+//    public String signUp(@RequestParam(name = "email") String email, Model model){
+//        model.addAttribute("emailAttr", email);
+//        return "coffee";
+//    }
     @GetMapping("/coffee/suppliers")
     public String showSuppliersForm(Model model){
         List<Supplier> suppliers = suppliersDao.findAll();

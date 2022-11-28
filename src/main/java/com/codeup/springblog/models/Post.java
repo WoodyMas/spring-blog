@@ -20,6 +20,9 @@ public class Post {
     @Column(nullable = false, length = 2000)
     private String body;
 
+    @ManyToOne
+    private User user;
+
     ///////////////// Getters and Setters /////////////////////
 
     // Getter Id
@@ -27,6 +30,13 @@ public class Post {
         return id;
     }
 
+    public User getUser() {
+        return user;
+    }
+
+    public void setUser(User user) {
+        this.user = user;
+    }
 
     // Getter Title
     public String getTitle(){
@@ -64,4 +74,18 @@ public class Post {
         this.title = title;
         this.body = body;
     }
+
+    public Post(User user, String title, String body){
+        this.user = user;
+        this.title = title;
+        this.body = body;
+    }
+
+    public Post(long id, String title, String body){
+        this.id=id;
+        this.body = body;
+        this.title = title;
+    }
+
+//    public Post
 }
