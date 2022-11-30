@@ -47,6 +47,9 @@
             </form>
         </div>
     </div>
+    <form th:action="@{/logout}" th:method="post">
+        <button>Logout</button>
+    </form>
 </nav>
 
     <img th:fragment="blog-img" src="/img/blog-header.png" alt="img-blog">

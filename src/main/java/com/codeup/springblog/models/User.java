@@ -47,7 +47,7 @@ public class User {
         this.userposts = userposts;
     }
 
-    @Column(nullable = false)
+    @Column(nullable = false, unique = true)
     private String username;
 
     @Column(nullable = false, length = 1000)
@@ -84,6 +84,21 @@ public class User {
     }
     public User(String name, String email, String password){
         this.username = name;
+        this.email = email;
+        this.password = password;
+    }
+
+    public User(long id, String email, String username, String password, List<Post> userposts) {
+        this.id = id;
+        this.email = email;
+        this.username = username;
+        this.password = password;
+//        this.userposts = userposts;
+    }
+
+    public User(long id, String username, String email, String password){
+        this.id = id;
+        this.username = username;
         this.email = email;
         this.password = password;
     }
