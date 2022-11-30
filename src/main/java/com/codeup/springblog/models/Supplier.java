@@ -14,6 +14,19 @@ public class Supplier {
     @Column(nullable = false)
     private String name;
 
+    public List<Coffee> getCoffees() {
+        return coffees;
+    }
+
+    public Supplier(String name, List<Coffee> coffees) {
+        this.name = name;
+        this.coffees = coffees;
+    }
+
+    public void setCoffees(List<Coffee> coffees) {
+        this.coffees = coffees;
+    }
+
     // Deleting a supplier will cascade to all coffees (and all coffees will be deleted)
     @OneToMany(cascade = CascadeType.ALL)
     private List <Coffee> coffees;

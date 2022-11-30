@@ -1,6 +1,7 @@
 package com.codeup.springblog.models;
 
 import javax.persistence.*;
+import java.util.List;
 
 // This is a POJO (Plain Old Java Object)
 @Entity
@@ -12,10 +13,24 @@ public class Coffee {
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private long id;
 
+
+
+    public Supplier getSupplier() {
+        return supplier;
+    }
+
+    public void setSupplier(Supplier supplier) {
+        this.supplier = supplier;
+    }
+
     // Many (Current Class) to ONE  Coffee to ONE Supplier
     @ManyToOne
     @JoinColumn(name = "supplier_id")
     private Supplier supplier;
+
+    @ManyToMany(mappedBy = "coffeeList")
+    private List<Customer> customers;
+
     private String roast;
     private String origin;
 

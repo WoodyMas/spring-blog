@@ -21,10 +21,6 @@ public class PostController {
 //    @ResponseBody
     public String allPosts(Model model){
 
-//        Post postTest1 = new Post(postDao, "I had a wonderful day! :)", "Today I had a wonderful day because I found a $20 bill!");
-//        Post postTest2 = new Post(postDao, "Why do people take my money?", "I accidentally dropped a $20 bill, and when I went back to see where I left it, it was GONE!!!!!!!!!!!");
-//        List<Post> allPostList = new ArrayList<>(List.of(postTest2, postTest1));
-//        model.addAttribute("allPosts", allPostList);
         List<Post> allPosts = postDao.findAll();
         model.addAttribute("posts", allPosts);
 
@@ -41,19 +37,51 @@ public class PostController {
         return "/posts/index";
     }
 
+    @GetMapping("/posts/{id}/edit")
+    public String editPostId(@PathVariable long id, Model model){
+        Post post = postDao.findById(id);
+        model.addAttribute("postEdit", post);
+
+        return "/posts/edit";
+    }
+
+    @PostMapping("/posts/{id}/edit")
+    public String editPostIdForm(@ModelAttribute Post editPost){
+        List<User> userList = userDao.findAll();
+        postDao.save(editPost);
+        return "redirect:/posts";
+    }
+
     @GetMapping("/posts/create")
 //    @ResponseBody
-    public String viewPostCreateForm(){
+    public String viewPostCreateForm(Model model){
+
+        model.addAttribute("post", new Post());
+        List<User> userList = userDao.findAll();
+        model.addAttribute(userList);
          return "/posts/create";
     }
 
     @PostMapping("/posts/create")
-    public String createNewController(@RequestParam(name="titleInput") String title, @RequestParam(name="bodyInput") String body ){
-        User user = userDao.findUserById(1);
-        Post post = new Post(user, title, body);
+    public String createNewController(@ModelAttribute Post post){
         postDao.save(post);
         return "redirect:/posts";
     }
+//    @GetMapping("/posts/edit")
+////    @ResponseBody
+//    public String viewPostCreateForm(Model model){
+//
+//        model.addAttribute("post", new Post());
+//        List<User> userList = userDao.findAll();
+//        model.addAttribute(userList);
+//        return "/posts/create";
+//    }
+//
+//    @PostMapping("/posts/edit")
+//    public String createNewController(@ModelAttribute Post post){
+//        postDao.save(post);
+//        return "redirect:/posts";
+//    }
 
 //    @PostMapping("/posts/create")
 //    @ResponseBody

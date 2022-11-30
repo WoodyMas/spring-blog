@@ -16,16 +16,21 @@
     <div class="container-fluid postDisplay">
 
             <div th:each="post : ${posts}" class="card postCard">
-                <h4><span th:text="${post.getTitle()}"></span></h4>
-                <hr>
-                <br>
+                <div>
+                    <h4><span th:text="${post.getTitle()}"></span></h4>
+                </div>
+<!--                <hr>-->
+                <div>
                 <p><span th:text="${post.getBody()}"></span></p>
-                <p>Email: <span th:text="${post.user.getEmail()}"></span> </p>
+<!--                <p>Email: <span th:text="${post.user.getEmail()}"></span> </p>-->
+                </div>
             </div>
 
     </div>
+
+
 </main>
 
-<footer th:replace="partials/partials.html :: bootstrap-footer"></footer>
+<!--<footer th:replace="partials/partials.html :: bootstrap-footer"></footer>-->
 </body>
 </html>

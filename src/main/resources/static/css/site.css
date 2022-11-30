@@ -22,18 +22,19 @@
 
 
 .postCard {
-    background-color: gray;
-    color: chartreuse;
-    margin: 1%;
-    width: 500px;
-    height: 100px;
-    padding: 0.5%;
+    background-color: gray; /* Gray background for post */
+    color: chartreuse; /* Text color */
+    margin: 0; /* margin for card*/
+    width: 100%; /* width of the card */
+    height: 100px; /* height of the card */
+    padding: 0;
     font-family: sans-serif;
     font-size: 100%;
     /*border-radius: 0px;*/
     /*justify-content: space-between;*/
     overflow-y: scroll;
     border-radius: 12px;
+    text-shadow: 2px 2px 3px black;
 
 }
 
@@ -46,6 +47,8 @@
     justify-items: center;
     flex-direction: row;
     overflow: hidden;
+    padding: 0;
+    margin: 10px;
 
 }
 

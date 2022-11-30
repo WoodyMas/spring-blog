@@ -19,6 +19,34 @@ public class User {
 //    @JoinColumn(name = "user_posts")
 //    private Post posts;
 
+    public void setEmail(String email) {
+        this.email = email;
+    }
+
+    public String getUsername() {
+        return username;
+    }
+
+    public void setUsername(String username) {
+        this.username = username;
+    }
+
+    public String getPassword() {
+        return password;
+    }
+
+    public void setPassword(String password) {
+        this.password = password;
+    }
+
+    public List<Post> getUserposts() {
+        return userposts;
+    }
+
+    public void setUserposts(List<Post> userposts) {
+        this.userposts = userposts;
+    }
+
     @Column(nullable = false)
     private String username;
 
