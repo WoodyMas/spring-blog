@@ -31,11 +31,6 @@ public class UserController {
         return passwordEncoder;
     }
 
-    //    public UserController(UserRepository userDao) {
-//        this.userDao = userDao;
-//    }
-//
-//    public UserController(PasswordEncoder passwordEncoder) {this.passwordEncoder = passwordEncoder;}
 
     @GetMapping("/allUsers")
     public String showAll(Model model){
