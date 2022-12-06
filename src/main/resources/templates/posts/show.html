@@ -8,39 +8,60 @@
 <!--&lt;!&ndash;    <title>Post SHOW</title>&ndash;&gt;-->
 <!--</head>-->
 <body>
-<main class="main-body">
-<nav th:replace="partials/partials.html :: bootstrap-nav"></nav>
-<div id="blog-banner-div">
-    <div th:replace="partials/partials.html :: blog-img"></div>
-</div>
-    <h1 class="d-flex justify-content-center"><strong>ALL POSTS</strong></h1>
+    <main class="main-body" sec:authorize="isAuthenticated()">
+    <nav th:replace="partials/partials.html :: bootstrap-nav"></nav>
+    <div id="blog-banner-div">
+        <div th:replace="partials/partials.html :: blog-img"></div>
+    </div>
 
-    <div class="container-fluid postDisplay">
+        <div class="justify-content-center">
+            <h1> Welcome <span sec:authorize="isAuthenticated()" th:text="${#authentication.principal.username}"></span>!</h1>
+        </div>
+<!--        <div class="content-wrap-posts" th:text="Welcome ${#authentication.principal.username}"></div>-->
+        <div class="content-wrap-posts" sec:authorize="isAuthenticated()">
+            <h1 class="col-6 d-flex justify-content-center"><strong><span>YOUR POSTS</span></strong></h1>
+            <h1 class="col-6 d-flex justify-content-center"><strong>ALL POSTS</strong></h1>
+        </div>
+        <div class="content-wrap-posts">
+            <div class="container-fluid postDisplay row col-6">
 
-            <div th:each="post : ${posts}" class="card postCard">
+                <div th:each="post : ${posts}" class="card postCard col-4">
+                    <div>
+                        <h4 th:text="${post.user.username}"></h4>
+                        <h4><span th:text="${post.getTitle()}"></span></h4>
+                    </div>
+                    <!-- <hr>-->
+                    <div>
+                    <p>
+                        <span th:text="${post.getBody()}"></span></p>
+                    <!--<p>Email: <span th:text="${post.user.getEmail()}"></span> </p>-->
+                    </div>
+                        <p th:if="${post.user.id} == ${#authentication.principal.id}">
+                            <button th:data-id="${post.id}" class="editButton">Edit</button>
+                            <button th:data-id="${post.id}" class="deleteButton">Delete</button>
+                        </p>
+    <!--D -->       </div> <!-- End postCard -->
+            </div> <!-- End first container row -->
+
+        <div class="container-fluid postDisplay row col-6">
+            <div th:each="post : ${posts}" class="card postCard col-4">
                 <div>
                     <h4 th:text="${post.user.username}"></h4>
                     <h4><span th:text="${post.getTitle()}"></span></h4>
                 </div>
-<!--                <hr>-->
+                <!--                <hr>-->
                 <div>
-                <p>
-                    <span th:text="${post.getBody()}"></span></p>
-<!--                <p>Email: <span th:text="${post.user.getEmail()}"></span> </p>-->
+                    <p>
+                        <span th:text="${post.getBody()}"></span></p>
+                    <!--                <p>Email: <span th:text="${post.user.getEmail()}"></span> </p>-->
                 </div>
-                    <p th:if="${post.user.id} == ${#authentication.principal.id}">
-                        <button th:data-id="${post.id}" class="editButton">Edit</button>
-
-                    </p>
             </div> <!-- End postCard -->
-
-    </div>
-
-
-</main>
+        </div> <!-- End second container row -->
+        </div> <!-- End postDisplay -->
+    </main>
 
 <!--<footer th:replace="partials/partials.html :: bootstrap-footer"></footer>-->
-<script th:replace="partials/partials.html :: jQuery-script"></script>
-<script src="/js/edit.js"></script>
+    <script th:replace="partials/partials.html :: jQuery-script"></script>
+    <script src="/js/edit.js"></script>
 </body>
 </html>

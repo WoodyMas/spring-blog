@@ -1,7 +1,11 @@
 .main-body {
     background-color: black;
+    padding: 0;
     color: white;
     font-family: sans-serif;
+    /*display: flex;*/
+    column-fill: auto;
+    /*overflow-y: scroll;*/
 
 }
 #page-container-fcc {
@@ -21,18 +25,23 @@
 }
 
 
+.content-wrap-posts {
+    display: flex;
+    justify-content: space-around;
+}
+
 .postCard {
     background-color: gray; /* Gray background for post */
     color: chartreuse; /* Text color */
-    margin: 0; /* margin for card*/
-    width: 100%; /* width of the card */
-    height: 100px; /* height of the card */
+    margin: .3em; /* margin for card*/
+    width: 630px; /* width of the card */
+    height: 200px; /* height of the card */
     padding: 0;
     font-family: sans-serif;
     font-size: 100%;
     /*border-radius: 0px;*/
     /*justify-content: space-between;*/
-    overflow-y: scroll;
+    /*overflow-y: scroll;*/
     border-radius: 12px;
     text-shadow: 2px 2px 3px black;
 
@@ -49,11 +58,25 @@
     overflow: hidden;
     padding: 0;
     margin: 0;
+    width: 700px;
+    height: 300px;
+    overflow-y: scroll;
+}
+
+#blog-banner-div {
+    /*overflow-y: scroll;*/
+    padding: 0px;
 
 }
 
 a:visited {
-    color: chartreuse;
+
+    color: purple;
+}
+
+.username-greeting {
+    font-family: sans-serif;
+    font-size: 50px;
 }
 
 .create-post-form {

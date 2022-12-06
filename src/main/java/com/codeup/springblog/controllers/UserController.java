@@ -53,16 +53,24 @@ public class UserController {
         return "redirect:/allUsers";
     }
 
-    @GetMapping("/users/register")
+    @GetMapping("/register")
     public String showRegistrationForm(Model model) {
         model.addAttribute("user", new User());
         return "/user-registration";
     }
 
-    @PostMapping("/users/register")
+    @PostMapping("/register")
     public String registerUser(@ModelAttribute User user){
         user.setPassword(passwordEncoder.encode(user.getPassword()));
-        userDao.save(user);
-        return "redirect:/posts/create";
+
+        if (user.getPassword() != "" && user.getEmail() != "" && user.getPassword() != "") {
+            userDao.save(user);
+            return "redirect:/posts/create";
+
+        }
+        else {
+            return "redirect:/register";
+        }
+
     }
 }

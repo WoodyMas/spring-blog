@@ -17,35 +17,20 @@
 
         <!-- This generates the blog post cards -->
         <div class="container-fluid postDisplay">
-<!--            <div th:each="post : ${allPosts}" class="card postCard">-->
-<!--                <h4><span th:text="${post.getTitle()}"></span></h4>-->
-<!--                <hr>-->
-<!--                <br>-->
-<!--                <p><span th:text="${post.getBody()}"></span></p>-->
-<!--            </div>-->
+
             <div class="d-flex">
                 <form class="create-post-form" method="post" th:object="${post}" th:action="@{/posts/create}">
                     <input id="titleInput" name="titleInput" th:field="*{title}">
                     <label for="titleInput">Title</label>
                     <textarea name="bodyInput" th:field="*{body}"></textarea>
                     <button type="submit" value="Submit Post">SUBMIT POST</button>
-<!--                    <select name="user" id="user" th:field="*{user.id}" >-->
-<!--                        <option-->
-<!--                                th:each="user : ${userList}"-->
-<!--                                th:value="${user.id}"-->
-<!--                                th:text="${user.username}">-->
-<!--                        </option>-->
-<!--                    </select>-->
                 </form>
             </div>
         </div>
     </main>
     <!-- Main -->
-
-
     <footer th:replace="partials/partials.html :: bootstrap-footer"></footer>
     <script th:replace="partials/partials.html :: jQuery-script"></script>
     <script th:replace="partials/partials.html :: main-js"></script>
-
 </body>
 </html>

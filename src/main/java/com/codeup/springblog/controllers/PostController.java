@@ -3,6 +3,7 @@ import com.codeup.springblog.models.Post;
 import com.codeup.springblog.models.User;
 import com.codeup.springblog.repositories.PostRepository;
 import com.codeup.springblog.repositories.UserRepository;
+import com.codeup.springblog.services.EmailService;
 import com.codeup.springblog.services.SpringBlogUtilities;
 import org.springframework.security.core.context.SecurityContext;
 import org.springframework.security.core.context.SecurityContextHolder;
@@ -10,6 +11,7 @@ import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.*;
 
+import javax.swing.*;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -18,24 +20,34 @@ public class PostController {
     private final PostRepository postDao;
     private final UserRepository userDao;
 
-    @GetMapping("/posts")
-    public String postsLandingPage(){
-        return "/posts/show";
+    private final EmailService emailService;
+
+    @GetMapping("/posts") // The original display with no edit function
+    public String postsLandingPage(Model model){
+        List<Post> allPostsForGuest = postDao.findAll();
+        model.addAttribute("posts", allPostsForGuest);
+        return "/posts/index"; // returning index.html
     }
 
-    @GetMapping("/posts/")
-//    @ResponseBody
+
+
+    @GetMapping("/posts/") // Display with edit functionality
     public String allPosts(Model model){
-        User loggedInUser =  (User) SecurityContextHolder
-                .getContext()
-                .getAuthentication()
-                .getPrincipal();
-        System.out.println();
+
+//        User loggedInUser = SpringBlogUtilities.currentUser();
         List<Post> allPosts = postDao.findAll();
         model.addAttribute("posts", allPosts);
 
+        long currentUserId = SpringBlogUtilities.currentUser().getId();
 
-        return "/posts/show";
+        if (currentUserId == 0){
+            return "redirect:/posts";
+        } else {
+            return "/posts/show";
+
+        }
+
+
     }
 
     @GetMapping("/posts/{id}")
@@ -44,7 +56,7 @@ public class PostController {
         Post postView = postDao.findById(id);
         model.addAttribute("aPost", postView);
 
-        return "/posts/index";
+        return "/posts/post-index";
     }
 
     @GetMapping("/posts/{id}/edit")
@@ -57,12 +69,12 @@ public class PostController {
         if (currentUserId == 0){
             return "redirect:/login";
         }
-        Post post1 = postDao.findById(id);
-        if (post1.getUser().getId() != currentUserId){
-            return "redirect:/posts";
+//        Post post1 = postDao.findById(id);
+        if (post.getUser().getId() != currentUserId){
+            return "redirect:/posts"; // return guest Landing page
         }
         model.addAttribute("post", post);
-            return "/posts/edit";
+            return "/posts/edit"; // returning edit.html
     }
 
 
@@ -70,42 +82,76 @@ public class PostController {
     @PostMapping("/posts/{id}/edit")
     public String editPostIdForm(@ModelAttribute Post editPost){
 
-
-
         List<User> userList = userDao.findAll();
         postDao.save(editPost);
-        return "redirect:/posts";
+        return "redirect:/posts/";
     }
+//    @GetMapping("/posts/{id}/delete")
+//    public String deletePost(@PathVariable long id, Model model) {
+//        Post selectedPost = postDao.findById(id);
+//        model.addAttribute("postDelete", selectedPost);
+//
+//        return "/posts/edit";
+//    }
+
+    @GetMapping("/posts/{id}/delete")
+    public String deletePost(@PathVariable long id, Post post){
+//        User user = SpringBlogUtilities.currentUser();
+//        post.setUser(user);
+        post = postDao.findById(id);
+        postDao.delete(post);
+        return "redirect:/posts/";
+    }
+
+//    @PostMapping("/posts/{id}/delete")
+//    public String deletePostId(@ModelAttribute Post deletePost) {
+//        List<User> userList = userDao.findAll();
+//        postDao.delete(deletePost);
+//        return "redirect:/posts/";
+//    }
 
     @GetMapping("/posts/create")
     public String viewPostCreateForm(Model model){
 
         model.addAttribute("post", new Post());
         List<User> userList = userDao.findAll();
-        model.addAttribute(userList);
-         return "/posts/create";
+//        model.addAttribute(userList);
+         return "/posts/create"; // returning create.html
     }
 
     @PostMapping("/posts/create")
     public String createNewController(@ModelAttribute Post post){
-    User loggedInUser = (User) SecurityContextHolder
-            .getContext()
-            .getAuthentication()
-            .getPrincipal();
-
-    long userId = loggedInUser.getId();
-    loggedInUser = userDao.findUserById(userId);
+    User loggedInUser = SpringBlogUtilities.currentUser();
+//    long userId = loggedInUser.getId();
+//    loggedInUser = userDao.findUserById(userId);
         post.setUser(loggedInUser);
+        emailService.prepareAndSend(loggedInUser, post.getTitle(), post.getBody());
         postDao.save(post);
-        return "redirect:/posts";
+        return "redirect:/posts/"; // redirecting to postsLandingPage(){};
     }
 
 
+    @GetMapping("/my-tools")
+    public String htmlTools(Model model) {
+        Post postTools = postDao.findById(SpringBlogUtilities.currentUser().getId());
+        model.addAttribute("allLoggedInPosts", postTools);
+        return "/partials/database-partials-users-posts";
+    }
+
+    @PostMapping("/my-tools")
+    public String htmlToolsView(Model model) {
+        User currentUser = SpringBlogUtilities.currentUser();
+        List<Post> allUserPosts = currentUser.getUserposts();
+        model.addAttribute("allUserPosts", allUserPosts);
+        return "/partials/database-partials-users-posts";
+
+    }
 
 ///////////////////////// Constructor ////////////////////////////////
-    public PostController(PostRepository postDao, UserRepository userDao){
+    public PostController(PostRepository postDao, UserRepository userDao, EmailService emailService){
         this.postDao = postDao;
         this.userDao = userDao;
+        this.emailService = emailService;
     }
 
 } // End PostController Class

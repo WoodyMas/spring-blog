@@ -16,7 +16,7 @@
     <div class="content-wrap-posts">
         <div class="container-fluid postDisplay row">
 
-            <div th:each="post : ${posts}" class="card postCard col-4">
+            <div th:each="post : ${aPost}" class="card postCard col-4">
                 <div>
                     <h4 th:text="${post.user.username}"></h4>
                     <h4><span th:text="${post.getTitle()}"></span></h4>

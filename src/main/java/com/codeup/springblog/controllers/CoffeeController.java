@@ -18,7 +18,6 @@ import java.util.List;
 public class CoffeeController {
     private final CoffeeRepository coffeeDao;
     private final SupplierRepository suppliersDao;
-
     private final CustomerRepository customerDao;
 
     public CoffeeController(CoffeeRepository coffeeDao, SupplierRepository suppliersDao, CustomerRepository customerDao) {
@@ -50,12 +49,7 @@ public class CoffeeController {
         return "coffee";
     }
 
-    // To make the form work we need a @PostMapping
-//    @PostMapping
-//    public String signUp(@RequestParam(name = "email") String email, Model model){
-//        model.addAttribute("emailAttr", email);
-//        return "coffee";
-//    }
+
     @GetMapping("/coffee/suppliers")
     public String showSuppliersForm(Model model){
         List<Supplier> suppliers = suppliersDao.findAll();

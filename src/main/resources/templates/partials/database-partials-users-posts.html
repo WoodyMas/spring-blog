@@ -1,0 +1,24 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org"
+      xmlns:sec="http://www.thymeleaf.org/extras/spring-security"
+        lang="en">
+<head>
+  <meta charset="UTF-8">
+  <title>myToozl</title>
+</head>
+<body>
+<div class="container-fluid postDisplay">
+    <div th:each="post : ${allUserPosts}">
+        <h4 th:text="${post.user}"></h4>
+        <h4 th:text="${post.title}"></h4>
+        <p>
+          <span th:text="${post.getBody()}"></span>
+        </p>
+    </div>
+  <hr>
+  </div>
+
+<script th:replace="partials/partials.html :: jQuery-script"></script>
+<script th:replace="partials/partials.html :: main-js"></script>
+</body>
+</html>
