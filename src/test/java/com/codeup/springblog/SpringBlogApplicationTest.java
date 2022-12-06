@@ -1,13 +1,11 @@
 package com.codeup.springblog;
 
-import org.junit.jupiter.api.Test;
+import org.junit.Test;
 import org.springframework.boot.test.context.SpringBootTest;
 
 @SpringBootTest
-class SpringBlogApplicationTests {
+public class SpringBlogApplicationTest {
 
     @Test
-    void contextLoads() {
-    }
-
+    void contextLoads(){}
 }

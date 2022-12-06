@@ -10,20 +10,6 @@ import org.springframework.security.web.SecurityFilterChain;
 
 @Configuration
 public class SecurityConfiguration {
-//    @Bean
-//    SecurityFilterChain defaultSecurityFilterChain(HttpSecurity http) throws Exception {
-//        http.authorizeHttpRequests()
-//                .antMatchers("/posts/create","/posts/{id}/edit").authenticated()
-//                .antMatchers("/","/posts", "/posts/{id}")
-//                .authenticated()
-//                .and().formLogin()
-//                .and().httpBasic();
-//
-//        http.formLogin();
-//        http.httpBasic();
-//        return http.build();
-//    }
-
     @Bean
     SecurityFilterChain defaultSecurityFilterChain(HttpSecurity http) throws Exception {
         http.authorizeHttpRequests()
@@ -35,20 +21,9 @@ public class SecurityConfiguration {
         return http.build();
     }
 
-//    @Bean
-//    SecurityFilterChain defaultSecurityFilterChain(HttpSecurity http) throws Exception {
-//        http.authorizeHttpRequests()
-//                .mvcMatchers("/", "/posts", "/posts/*", "/register").permitAll()
-//                .mvcMatchers("/posts/create", "/posts/*/edit", "/posts/", "/my-tools").authenticated()
-//                .and().formLogin().loginPage("/login").defaultSuccessUrl("/posts")
-//                .and().logout()
-//                .and().httpBasic();
-//        return http.build();
-//    }
     @Bean
     public PasswordEncoder passwordEncoder(){
         return new BCryptPasswordEncoder();
     }
-
 
 }

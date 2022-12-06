@@ -1,0 +1,56 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org"
+      xmlns:sec="http://www.thymeleaf.org/extras/spring-security"
+      lang="en">
+<head th:replace="partials/partials.html :: head ('Welcome Guest!')">
+  <!-- /posts -->
+<body>
+<main class="main-body">
+  <nav th:replace="partials/partials.html :: bootstrap-nav"></nav>
+  <div id="blog-banner-div">
+    <div th:replace="partials/partials.html :: blog-img"></div>
+  </div>
+  <div class="d-flex justify-content-center">
+    <h1 sec:authorize="isAnonymous()" ><strong>Your Voice Could be Heard...</strong></h1>
+    <h1 sec:authorize="isAuthenticated()" ><strong>Why don't you upload <span th:text="${#authentication.principal.username}"></span>?</strong></h1>
+
+  </div>
+  <div class="d-flex justify-content-center" >
+    <p sec:authorize="isAnonymous()">
+      You can view EVERY post that's been submitted here. Feeling left out of the conversations? Better <a th:href="@{/register}">Register</a> or <a th:href="@{/login}">Login</a>!
+    </p><p sec:authorize="isAuthenticated()">
+      Wanna <a th:href="@{/posts/create}">UPLOAD A THOUGHT</a> <span th:text="${#authentication.principal.username}"></span>?
+    </p>
+  </div>
+
+
+      <div class="content-wrap-posts">
+          <div class="container-fluid postDisplay row">
+
+              <div th:each="post : ${posts}" class="card postCard col-4">
+                  <div>
+                      <h4 th:text="${post.user.username}"></h4>
+                      <h4><span th:text="${post.getTitle()}"></span></h4>
+                  </div>
+                  <div>
+                      <p>
+                          <span th:text="${post.getBody()}"></span></p>
+                  </div>
+
+              </div> <!-- End postCard -->
+
+          </div>
+      </div>
+
+
+
+
+</main>
+<!--<section>-->
+<!--    <footer th:replace="partials/partials.html :: bootstrap-footer"></footer>-->
+<!--</section>-->
+
+<script th:replace="partials/partials.html :: jQuery-script"></script>
+<script src="/js/edit.js"></script>
+</body>
+</html>

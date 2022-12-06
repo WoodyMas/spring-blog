@@ -5,14 +5,10 @@ import com.codeup.springblog.repositories.PostRepository;
 import com.codeup.springblog.repositories.UserRepository;
 import com.codeup.springblog.services.EmailService;
 import com.codeup.springblog.services.SpringBlogUtilities;
-import org.springframework.security.core.context.SecurityContext;
-import org.springframework.security.core.context.SecurityContextHolder;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.*;
 
-import javax.swing.*;
-import java.util.ArrayList;
 import java.util.List;
 
 @Controller
@@ -22,14 +18,25 @@ public class PostController {
 
     private final EmailService emailService;
 
-    @GetMapping("/posts") // The original display with no edit function
+    @GetMapping("/splash") // The original display with no edit function
     public String postsLandingPage(Model model){
         List<Post> allPostsForGuest = postDao.findAll();
         model.addAttribute("posts", allPostsForGuest);
-        return "/posts/index"; // returning index.html
+        return "/posts/splash"; // returning splash.html
+    }
+
+    @GetMapping("/posts")
+    public String guestLandingAllPosts(Model model) {
+        List<Post> allGuestPosts = postDao.findAll();
+        model.addAttribute("posts", allGuestPosts);
+        return "/posts/guest-post-view";
     }
 
 
+//    @GetMapping("/allPosts")
+//    public String guestLandingAllPosts(Model model) {
+//        List<Post> allGuestPost
+//    }
 
     @GetMapping("/posts/") // Display with edit functionality
     public String allPosts(Model model){
@@ -109,6 +116,8 @@ public class PostController {
 //        postDao.delete(deletePost);
 //        return "redirect:/posts/";
 //    }
+
+
 
     @GetMapping("/profile")
     public String allPostsBlog(Model model){
