@@ -110,6 +110,15 @@ public class PostController {
 //        return "redirect:/posts/";
 //    }
 
+    @GetMapping("/profile")
+    public String allPostsBlog(Model model){
+
+        User user = userDao.findUserById(SpringBlogUtilities.currentUserProfile());
+        List<Post> blog = user.getUserposts();
+        model.addAttribute("blogs", blog);
+        return "/posts/show";
+    }
+
     @GetMapping("/posts/create")
     public String viewPostCreateForm(Model model){
 

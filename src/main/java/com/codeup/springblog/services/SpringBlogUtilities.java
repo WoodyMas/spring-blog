@@ -10,4 +10,9 @@ public class SpringBlogUtilities {
     }
 
 
+
+    public static long currentUserProfile(){
+        return ((User) SecurityContextHolder.getContext().getAuthentication().getPrincipal()).getId();
+    }
+
 }
