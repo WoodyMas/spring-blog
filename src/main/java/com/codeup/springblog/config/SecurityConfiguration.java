@@ -28,7 +28,7 @@ public class SecurityConfiguration {
     SecurityFilterChain defaultSecurityFilterChain(HttpSecurity http) throws Exception {
         http.authorizeHttpRequests()
                 .antMatchers("/", "/posts", "/posts/{id}(id=${post.id})", "/register").permitAll()
-                .antMatchers("/posts/create", "/posts/{id}/edit", "/posts/", "/my-tools").authenticated()
+                .antMatchers("/posts/create", "/posts/{id}/edit", "/posts/", "/my-tools", "/allUsers").authenticated()
                 .and().formLogin().loginPage("/login").defaultSuccessUrl("/posts/")
                 .and().logout()
                 .and().httpBasic();

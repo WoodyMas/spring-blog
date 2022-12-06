@@ -10,26 +10,33 @@
     <div id="blog-banner-div">
         <div th:replace="partials/partials.html :: blog-img"></div>
     </div>
-    <h1 class="d-flex justify-content-center"><strong>ALL POSTS</strong></h1>
-
-
-    <div class="content-wrap-posts">
-        <div class="container-fluid postDisplay row">
-
-            <div th:each="post : ${posts}" class="card postCard col-4">
-                <div>
-                    <h4 th:text="${post.user.username}"></h4>
-                    <h4><span th:text="${post.getTitle()}"></span></h4>
-                </div>
-                <div>
-                    <p>
-                        <span th:text="${post.getBody()}"></span></p>
-                </div>
-
-            </div> <!-- End postCard -->
-
-        </div>
+    <div class="d-flex justify-content-center">
+    <h1><strong>You've landed! SPLASH!!</strong></h1>
     </div>
+    <div class="d-flex justify-content-center" >
+        <p>
+            Welcome to SpringBlog! Create an Account and post with strangers online! To register, click the Register button. To login, click the sign in button!
+        </p>
+    </div>
+
+
+<!--    <div class="content-wrap-posts">-->
+<!--        <div class="container-fluid postDisplay row">-->
+
+<!--            <div th:each="post : ${posts}" class="card postCard col-4">-->
+<!--                <div>-->
+<!--                    <h4 th:text="${post.user.username}"></h4>-->
+<!--                    <h4><span th:text="${post.getTitle()}"></span></h4>-->
+<!--                </div>-->
+<!--                <div>-->
+<!--                    <p>-->
+<!--                        <span th:text="${post.getBody()}"></span></p>-->
+<!--                </div>-->
+
+<!--            </div> &lt;!&ndash; End postCard &ndash;&gt;-->
+
+<!--        </div>-->
+<!--    </div>-->
 
 
 
