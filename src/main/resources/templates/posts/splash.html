@@ -13,9 +13,26 @@
     <div class="d-flex justify-content-center">
     <h1><strong>You've landed! SPLASH!!</strong></h1>
     </div>
-    <div class="d-flex justify-content-center" >
+    <div sec:authorize="isAnonymous()" class="d-flex justify-content-center row" >
         <p>
-            Welcome to SpringBlog! Create an Account and post with strangers online! To register, click the Register button. To login, click the sign in button!
+            <div class="center-stretch-wrapper col-12">
+                Welcome to SpringBlog! Create an Account and post with strangers online!
+                <br>
+            </div>
+            <div class="center-stretch-wrapper col-12">
+                Click&nbsp;<a th:href="@{/register}">here</a>&nbsp;to register!
+                <br>
+            </div>
+            <div class="center-stretch-wrapper col-12">
+                Click&nbsp;<a th:href="@{/login}">here</a>&nbsp;to login if you already have an account with us!
+            </div>
+        </p>
+<!--        <p>Click <a th:href="@{/login}">here</a> to login!</p>-->
+
+    </div>
+    <div sec:authorize="isAuthenticated()" class="d-flex justify-content-center" >
+        <p>
+            We are so happy to see you again, <strong><span th:text="${#authentication.principal.username}"></span>!</strong>
         </p>
     </div>
 

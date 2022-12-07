@@ -30,6 +30,16 @@
     justify-content: space-around;
 }
 
+.center-stretch-wrapper {
+    display: flex;
+    justify-content: center;
+    width: 100%;
+}
+
+#userSelect {
+    visibility: hidden;
+}
+
 .postCard {
     background-color: gray; /* Gray background for post */
     color: chartreuse; /* Text color */

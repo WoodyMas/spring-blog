@@ -15,7 +15,7 @@ public class SecurityConfiguration {
         http.authorizeHttpRequests()
                 .antMatchers("/", "/posts", "/posts/{id}(id=${post.id})", "/register").permitAll()
                 .antMatchers("/posts/create", "/posts/{id}/edit", "/posts/", "/my-tools", "/allUsers").authenticated()
-                .and().formLogin().loginPage("/login").defaultSuccessUrl("/posts/")
+                .and().formLogin().loginPage("/login").defaultSuccessUrl("/splash")
                 .and().logout()
                 .and().httpBasic();
         return http.build();

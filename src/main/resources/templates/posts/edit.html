@@ -2,37 +2,57 @@
 <html xmlns:th="http://www.thymeleaf.org"
       xmlns:sec="http://www.thymeleaf.org/extras/spring-security"
       lang="en">
-<head>
-    <meta charset="UTF-8">
-    <title>Edit Post</title>
-</head>
+<head th:replace="partials/partials.html :: head ('Edit Post')">
 <body>
+<nav th:replace="partials/partials.html :: bootstrap-nav"></nav>
+    <main class="main-body">
 <div sec:authorize="isAuthenticated()">
     This content is only shown to authenticated users.
 
-    User ID: <span th:text="${#authentication.principal.id}"/><br>
-    Username: <span th:text="${#authentication.principal.username}"/><br>
-    Email: <span th:text="${#authentication.principal.email}"/><br>
+    <p class="center-stretch-wrapper">User ID: <span th:text="${#authentication.principal.id}"/></p>
+    <p class="center-stretch-wrapper">Username: <span th:text="${#authentication.principal.username}"/></p>
+    <p class="center-stretch-wrapper">Email: <span th:text="${#authentication.principal.email}"/></p>
+
+
+<!--    Username: <span th:text="${#authentication.principal.username}"/><br>-->
+<!--    Email: <span th:text="${#authentication.principal.email}"/><br>-->
 </div>
+        <div class="center-stretch-wrapper">
+            <h1>Edit Post: <span th:text="${post.id}"></span></h1>
+        </div> <!-- End stretch wrapper -->
+        <div class="center-stretch-wrapper">
+            <div class="container-fluid postDisplay">
+                <div class="content-wrap-posts">
+                    <div class="container-fluid postDisplay row">
+                        <div class="card postCard col-4">
+                            <form th:action="@{/posts/{id}/edit(id=${postEdit.id})}" class="create-post-form" method="post" th:object="${postEdit}">
+                                <div class="center-stretch-wrapper">
+                                    <label for="titleInput">Title</label>
+                                </div>
+                                <div class="center-stretch-wrapper">
+                                    <input class="d-flex" id="titleInput" name="titleInput" th:field="*{title}">
+                                </div>
+                                <div class="center-stretch-wrapper">Body:</div>
+                                <div class="center-stretch-wrapper">
+                                    <textarea name="bodyInput" th:field="*{body}"></textarea>
+                                </div>
+                                <div class="center-stretch-wrapper">
+                                    <button class="d-flex" type="submit" value="Submit Post">SUBMIT POST</button>
+                                </div>
 
-<div class="container-fluid postDisplay">
-    <div class="d-flex">
-        <form th:action="@{/posts/{id}/edit(id=${postEdit.id})}" class="create-post-form" method="post" th:object="${postEdit}">
-            <input id="titleInput" name="titleInput" th:field="*{title}">
-            <label for="titleInput">Title</label>
-            <textarea name="bodyInput" th:field="*{body}"></textarea>
-            <button type="submit" value="Submit Post">SUBMIT POST</button>
-            <select name="user" id="user" th:field="*{user.id}" >
-                <option
-                        th:each="post : ${postEdit}"
-                        th:value="${post.user.id}"
-                        th:text="${post.user.username}">
-                </option>
-            </select>
-        </form>
-    </div>
-
-</div>
-
+                                <select name="user" id="userSelect" th:field="*{user.id}" >
+                                    <option
+                                            th:each="post : ${postEdit}"
+                                            th:value="${post.user.id}"
+                                            th:text="${post.user.username}">
+                                    </option>
+                                </select>
+                            </form>
+                        </div>
+                    </div>
+                </div>
+            </div> <!-- End stretch wrapper -->
+        </div>
+    </main>
 </body>
 </html>

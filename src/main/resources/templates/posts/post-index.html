@@ -10,7 +10,7 @@
     <div id="blog-banner-div">
         <div th:replace="partials/partials.html :: blog-img"></div>
     </div>
-    <h1 class="d-flex justify-content-center"><strong>ALL POSTS</strong></h1>
+    <h1 class="d-flex justify-content-center">POST:&nbsp<strong th:text="${aPost.id}"></strong></h1>
 
 
     <div class="content-wrap-posts">
@@ -24,6 +24,12 @@
                 <div>
                     <p>
                         <span th:text="${post.getBody()}"></span></p>
+                </div>
+                <div sec:authorize="isAuthenticated()">
+                    <p th:if="${post.user.id} == ${#authentication.principal.id}">
+                        <button th:data-id="${post.id}" class="editButton">Edit</button>
+                        <button th:data-id="${post.id}" class="deleteButton">Delete</button>
+                    </p>
                 </div>
 
             </div> <!-- End postCard -->

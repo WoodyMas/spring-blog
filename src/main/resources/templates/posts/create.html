@@ -16,16 +16,19 @@
         <h1 class="d-flex justify-content-center"><strong>POST UR TROOTH</strong></h1>
 
         <!-- This generates the blog post cards -->
+        <div class="justify-content-center">
         <div class="container-fluid postDisplay">
 
-            <div class="d-flex">
+            <div class="">
                 <form class="create-post-form" method="post" th:object="${post}" th:action="@{/posts/create}">
-                    <input id="titleInput" name="titleInput" th:field="*{title}">
-                    <label for="titleInput">Title</label>
-                    <textarea name="bodyInput" th:field="*{body}"></textarea>
-                    <button type="submit" value="Submit Post">SUBMIT POST</button>
+                    <label class="center-stretch-wrapper" for="titleInput">Title</label>
+                    <input class="center-stretch-wrapper" id="titleInput" name="titleInput" th:field="*{title}">
+                    <p class="center-stretch-wrapper">Your Message</p>
+                    <textarea class="center-stretch-wrapper" name="bodyInput" th:field="*{body}"></textarea>
+                    <button class="center-stretch-wrapper" type="submit" value="Submit Post">SUBMIT POST</button>
                 </form>
             </div>
+        </div>
         </div>
     </main>
     <!-- Main -->
