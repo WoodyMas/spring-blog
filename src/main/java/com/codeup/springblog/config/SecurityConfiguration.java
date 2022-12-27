@@ -12,6 +12,7 @@ import org.springframework.security.web.SecurityFilterChain;
 public class SecurityConfiguration {
     @Bean
     // everything behind permitAll() will be viewed by visitors and users alike
+    // everything before .authenticated will be viewable by only authenticated users
     SecurityFilterChain defaultSecurityFilterChain(HttpSecurity http) throws Exception {
         http.authorizeHttpRequests()
                 .antMatchers("/", "/posts", "/posts/{id}(id=${post.id})", "/register").permitAll()
