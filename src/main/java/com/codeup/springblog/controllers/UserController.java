@@ -69,6 +69,7 @@ public class UserController {
 
         if (user.getPassword() != "" && user.getEmail() != "" && user.getPassword() != "") {
             userDao.save(user);
+            // We loves the String.format() >:) how very useful >:)))))
             emailService.prepareAndSend(user, String.format("A new user: %s has registered!", user.getUsername()), String.format("""
                 Username: %s
                 Email: %s
