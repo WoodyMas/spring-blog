@@ -17,6 +17,7 @@ public class SecurityConfiguration {
         http.authorizeHttpRequests()
                 .antMatchers("/", "/posts", "/posts/{id}(id=${post.id})", "/register").permitAll()
                 .antMatchers("/posts/create", "/posts/{id}/edit", "/posts/", "/my-tools", "/allUsers").authenticated()
+                // in the /login page, if successfully logged in, user will be redirected to splash page
                 .and().formLogin().loginPage("/login").defaultSuccessUrl("/splash")
                 .and().logout()
                 .and().httpBasic();
