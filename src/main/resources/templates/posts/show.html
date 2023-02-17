@@ -18,8 +18,12 @@
             </h1>
         </div>
         <div class="content-wrap-posts" sec:authorize="isAuthenticated()">
-            <h1 class="col-6 d-flex justify-content-center"><strong><span>YOUR POSTS</span></strong></h1>
-            <h1 class="col-6 d-flex justify-content-center"><strong>ALL POSTS</strong></h1>
+            <h1 class="col-6 d-flex justify-content-center">
+                <strong><span>YOUR POSTS</span></strong>
+            </h1>
+            <h1 class="col-6 d-flex justify-content-center">
+                <strong>ALL POSTS</strong>
+            </h1>
         </div>
         <div class="content-wrap-posts">
             <div class="container-fluid postDisplay row col-6">
@@ -27,11 +31,14 @@
                 <div th:each="post : ${posts}" class="card postCard col-4">
                     <div>
                         <h4 th:text="${post.user.username}"></h4>
-                        <h4><span th:text="${post.getTitle()}"></span></h4>
+                        <h4>
+                            <span th:text="${post.getTitle()}"></span>
+                        </h4>
                     </div>
                     <div>
-                    <p>
-                        <span th:text="${post.getBody()}"></span></p>
+                        <p>
+                            <span th:text="${post.getBody()}"></span>
+                        </p>
                     </div>
                         <p th:if="${post.user.id} == ${#authentication.principal.id}">
                             <button th:data-id="${post.id}" class="editButton">Edit</button>
@@ -40,19 +47,24 @@
                 </div> <!-- End postCard -->
             </div> <!-- End first container row -->
 
-        <div class="container-fluid postDisplay row col-6">
-            <div th:each="post : ${posts}" class="card postCard col-4">
-                <div>
-                    <h4 th:text="${post.user.username}"></h4>
-                    <h4><span th:text="${post.getTitle()}"></span></h4>
+            <div class="container-fluid postDisplay row col-6">
+                <div th:each="post : ${posts}" class="card postCard col-4">
+                    <div>
+                        <h4 th:text="${post.user.username}"></h4>
+                        <h4>
+                            <span th:text="${post.getTitle()}"></span>
+                        </h4>
+                    </div>
+                    <div>
+                        <p>
+                            <span th:text="${post.getBody()}"></span></p>
+                    </div>
+                <!-- End postCard -->
                 </div>
-                <div>
-                    <p>
-                        <span th:text="${post.getBody()}"></span></p>
-                </div>
-            </div> <!-- End postCard -->
-            </div> <!-- End second container row -->
-        </div> <!-- End content-wrap-posts -->
+                <!-- End second container row -->
+            </div>
+        <!-- End content-wrap-posts -->
+        </div>
     </main>
 
 <!--<footer th:replace="partials/partials.html :: bootstrap-footer"></footer>-->
