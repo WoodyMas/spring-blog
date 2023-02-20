@@ -12,9 +12,10 @@
         </div>
 
         <div class="justify-content-center">
-            <h1> Welcome <span sec:authorize="isAuthenticated()"
-                               th:text="${#authentication.principal.username}">
-                         </span>!
+            <h1> Welcome
+                <span sec:authorize="isAuthenticated()"
+                    th:text="${#authentication.principal.username}">
+                </span>!
             </h1>
         </div>
         <div class="content-wrap-posts" sec:authorize="isAuthenticated()">

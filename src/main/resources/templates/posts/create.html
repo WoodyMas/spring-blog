@@ -8,17 +8,13 @@
 <body>
     <!-- Navbar -->
     <nav th:replace="partials/partials.html :: bootstrap-nav"></nav>
-    <!-- Navbar -->
-
     <!-- Main -->
     <main class="main-body">
         <!-- Post your truth title -->
         <h1 class="d-flex justify-content-center"><strong>POST UR TROOTH</strong></h1>
-
         <!-- This generates the blog post cards -->
         <div class="justify-content-center">
         <div class="container-fluid postDisplay">
-
             <div class="">
                 <form class="create-post-form" method="post" th:object="${post}" th:action="@{/posts/create}">
                     <label class="center-stretch-wrapper" for="titleInput">Title</label>

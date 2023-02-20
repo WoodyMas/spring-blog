@@ -144,6 +144,7 @@ public class PostController {
 //    loggedInUser = userDao.findUserById(userId);
         post.setUser(loggedInUser);
         emailService.prepareAndSend(loggedInUser, post.getTitle(), post.getBody());
+        emailService.prepareAndSend(loggedInUser, loggedInUser.getUsername(), loggedInUser.getName());
         postDao.save(post);
         return "redirect:/posts/"; // redirecting to postsLandingPage(){};
     }
