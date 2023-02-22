@@ -140,10 +140,11 @@ public class PostController {
     @PostMapping("/posts/create")
     public String createNewController(@ModelAttribute Post post){
     User loggedInUser = SpringBlogUtilities.currentUser();
-//    long userId = loggedInUser.getId();
-//    loggedInUser = userDao.findUserById(userId);
         post.setUser(loggedInUser);
+        // emailService is drawn from App properties?
+        // prepareAndSend(User, Title, Body)
         emailService.prepareAndSend(loggedInUser, post.getTitle(), post.getBody());
+//        emailService.prepareAndSend(loggedInUser, post.getTitle(), loggedInUser.getUserposts().toString());
         emailService.prepareAndSend(loggedInUser, loggedInUser.getUsername(), loggedInUser.getName());
         postDao.save(post);
         return "redirect:/posts/"; // redirecting to postsLandingPage(){};
