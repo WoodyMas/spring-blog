@@ -2,6 +2,7 @@ package com.codeup.springblog.controllers;
 
 import com.codeup.springblog.models.User;
 import com.codeup.springblog.repositories.UserRepository;
+import com.codeup.springblog.services.EmailService;
 import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
@@ -18,9 +19,12 @@ public class UserController {
 
     private final PasswordEncoder passwordEncoder;
 
-    public UserController(UserRepository userDao, PasswordEncoder passwordEncoder){
+    private final EmailService emailService;
+
+    public UserController(UserRepository userDao, PasswordEncoder passwordEncoder, EmailService emailService){
         this.userDao = userDao;
         this.passwordEncoder = passwordEncoder;
+        this.emailService = emailService;
     }
 
     public UserRepository getUserDao() {
@@ -65,6 +69,10 @@ public class UserController {
 
         if (user.getPassword() != "" && user.getEmail() != "" && user.getPassword() != "") {
             userDao.save(user);
+            emailService.prepareAndSend(user, String.format("A new user: %s has registered!", user.getUsername()), String.format("""
+                Username: %s
+                Email: %s
+                """, user.getUsername(), user.getEmail()));
             return "redirect:/posts/create";
 
         }
