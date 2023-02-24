@@ -12,7 +12,7 @@
   <div th:if="${param.logout}">
     Successfully logged out!
   </div>
-  <form th:action="@{/login}" method="post">
+  <form id="login-form" th:action="@{/login}" method="post">
     <label for="username"></label>
     <input th:placeholder="Username" id="username" name="username" type="text">
     <label for="password"></label>
@@ -20,7 +20,30 @@
     <input type="submit" value="Log In">
   </form>
   <a th:href="@{/register}">Register</a>
+  <a href="#" onclick="toggleForm()">ResetPassword</a>
+<!--  <a href="#" onclick="toggleForm()">Reset Password</a>-->
+
+  <!-- Add a form with inputs for "username" and "password" and set its style to "display: none;" to hide it initially -->
+  <form th:action="@{/login}" id="resetForm" style="display: none;">
+    <label for="username-search">Username:</label>
+    <input type="text" id="username-search" name="username-search"><br>
+    <button type="submit">Reset</button>
+  </form>
 
 
+
+  <script>
+    function toggleForm() {
+      var form = document.getElementById("resetForm");
+      var loginForm = document.getElementById("login-form")
+      if (form.style.display === "none") {
+        form.style.display = "block";
+        loginForm.style.display = "none";
+
+      } else {
+        form.style.display = "none";
+      }
+    }
+  </script>
 </body>
 </html>
