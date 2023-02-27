@@ -8,6 +8,8 @@ import java.util.List;
 @Table(name = "user")
 
 public class User {
+    // Adding admin privileges will require attention that I cannot allocate at the moment
+
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private long id;
