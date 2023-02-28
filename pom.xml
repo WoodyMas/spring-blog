@@ -30,6 +30,7 @@
             <artifactId>spring-boot-starter-data-jpa</artifactId>
         </dependency>
         <dependency>
+            <!-- mySql connector with java #findMe! -->
             <groupId>mysql</groupId>
             <artifactId>mysql-connector-java</artifactId>
         </dependency>
@@ -42,6 +43,7 @@
         </dependency>
         <!-- https://mvnrepository.com/artifact/junit/junit -->
         <dependency>
+            <!-- jUnit testing suite -->
             <groupId>junit</groupId>
             <artifactId>junit</artifactId>
 <!--            <version>4.13.2</version>-->
